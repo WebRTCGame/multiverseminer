@@ -1,23 +1,23 @@
 !function(){
 
-ErrorLevel = {
+var ErrorLevel = {
     'debug': 'DEBUG',
     'info': 'INFO',
     'error': 'ERROR'
 };
 
-Vector3 = function Vector3(x, y, z) {
+var Vector3 = function Vector3(x, y, z) {
     this.x = x;
     this.y = y;
     this.z = z;
 };
 
-Vector2 = function Vector2(x, y) {
+var Vector2 = function Vector2(x, y) {
     this.x = x;
     this.y = y;
 };
 
-utils = {
+var utils = {
     startTime: Date.now(),
 
     // ---------------------------------------------------------------------------
@@ -91,7 +91,7 @@ utils = {
     // ---------------------------------------------------------------------------	
     getDayTimeInSeconds: function() {
         var now = new Date();
-        then = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+        var then = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
         return now.getTime() - then.getTime();
     },
 
@@ -122,7 +122,7 @@ utils = {
         }
 
         var timeSplit = utils.splitDateTime(seconds);
-        var days, hours, minutes, seconds;
+        var days, hours, minutes;
 
         days = timeSplit[0];
         days = (days > 0) ? days + 'd ' : '';
@@ -136,8 +136,8 @@ utils = {
         seconds = timeSplit[3];
         seconds = (seconds > 0) ? utils.pad(seconds, 2) + 's ' : '';
 
-        if (highPrecision == true) {
-            milliSeconds = timeSplit[4];
+        if (highPrecision) {
+            var milliSeconds = timeSplit[4];
             milliSeconds = (milliSeconds > 0) ? utils.pad(milliSeconds, 3) + 'ms' : '';
 
             return (days + hours + minutes + seconds + milliSeconds).trim();
@@ -146,16 +146,16 @@ utils = {
         return (days + hours + minutes + seconds).trim();
     },
 
-    getShortTimeDisplay: function(seconds) {
-        if (seconds === 0 || seconds == Number.POSITIVE_INFINITY) {
+    getShortTimeDisplay: function(iSeconds) {
+        if (iSeconds === 0 || iSeconds == Number.POSITIVE_INFINITY) {
             return '~~';
         }
 
-        var timeSplit = utils.splitDateTime(seconds);
+        var timeSplit = utils.splitDateTime(iSeconds);
 
-        hours = utils.pad(timeSplit[1], 2) + ':';
-        minutes = utils.pad(timeSplit[2], 2) + ':';
-        seconds = utils.pad(timeSplit[3], 2);
+        var hours = utils.pad(timeSplit[1], 2) + ':';
+        var minutes = utils.pad(timeSplit[2], 2) + ':';
+        var seconds = utils.pad(timeSplit[3], 2);
 
         return hours + minutes + seconds;
     },
@@ -170,7 +170,7 @@ utils = {
     },
 
     load: function(property, defaultValue) {
-        loadedValue = localStorage[property];
+        var loadedValue = localStorage[property];
         if (localStorage[property] == undefined) {
             return defaultValue;
         }
@@ -179,7 +179,7 @@ utils = {
     },
 
     loadBool: function(property, defaultValue) {
-        loadedValue = localStorage[property];
+        var loadedValue = localStorage[property];
         if (localStorage[property] == undefined) {
             return defaultValue;
         }
@@ -188,7 +188,7 @@ utils = {
     },
 
     loadInt: function(property, defaultValue) {
-        loadedValue = localStorage[property];
+        var loadedValue = localStorage[property];
         if (localStorage[property] == undefined) {
             return defaultValue;
         }
@@ -197,7 +197,7 @@ utils = {
     },
 
     loadFloat: function(property, defaultValue) {
-        loadedValue = localStorage[property];
+        var loadedValue = localStorage[property];
         if (localStorage[property] == undefined) {
             return defaultValue;
         }
